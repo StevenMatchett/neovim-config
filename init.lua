@@ -190,6 +190,13 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- move focus using leader arrow key
+vim.keymap.set("n", "<leader><up>", "<C-w><up>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<leader><down>", "<C-w><down>", { desc = "Move focus to the lower window" }) 
+vim.keymap.set("n", "<leader><left>", "<C-w><left>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<leader><right>", "<C-w><right>", { desc = "Move focus to the right window" })
+
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
