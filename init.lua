@@ -158,8 +158,15 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.diagnostic.config({
+  virtual_text = true, -- Turn off inline diagnostics
+})
+
+-- Use this if you want it to automatically show all diagnostics on the
+-- current line in a floating window. Personally, I find this a bit
+-- distracting and prefer to manually trigger it (see below). The
+-- CursorHold event happens when after `updatetime` milliseconds. The
+-- default is 4000 which is much too long
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -192,10 +199,9 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- move focus using leader arrow key
 vim.keymap.set("n", "<leader><up>", "<C-w><up>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<leader><down>", "<C-w><down>", { desc = "Move focus to the lower window" }) 
+vim.keymap.set("n", "<leader><down>", "<C-w><down>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<leader><left>", "<C-w><left>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<leader><right>", "<C-w><right>", { desc = "Move focus to the right window" })
-
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -806,6 +812,27 @@ require("lazy").setup({
   },
   { "APZelos/blamer.nvim" },
   { "nvim-tree/nvim-tree.lua" },
+  {
+    {
+      "kdheepak/lazygit.nvim",
+      cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+      },
+      -- optional for floating window border decoration
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+      -- setting the keybinding for LazyGit with 'keys' is recommended in
+      -- order to load the plugin when the command is run for the first time
+      keys = {
+        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      },
+    },
+  },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -914,7 +941,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 -- The line beneath this is called `modeline`. See `:help modeline`
