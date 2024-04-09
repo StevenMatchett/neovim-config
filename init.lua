@@ -80,7 +80,7 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 
 I hope you enjoy your Neovim journey,
 - TJ
-
+theme = "dashboard"
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
@@ -833,6 +833,13 @@ require("lazy").setup({
       },
     },
   },
+  {
+    "startup-nvim/startup.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function()
+      require("startup").setup()
+    end,
+  },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -944,6 +951,8 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
+--
+--
 -- The line beneath this is called `modeline`. See `:help modeline`
 
 -- vim: ts=2 sts=2 sw=2 et
