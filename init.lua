@@ -811,6 +811,10 @@ require("lazy").setup({
     end,
   },
   { "APZelos/blamer.nvim" },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
   { "nvim-tree/nvim-tree.lua" },
   {
     {
@@ -951,7 +955,9 @@ require("nvim-tree").setup({
     dotfiles = false,
   },
 })
---
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
+
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 
