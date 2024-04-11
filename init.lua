@@ -844,6 +844,12 @@ require("lazy").setup({
       require("startup").setup()
     end,
   },
+  {
+    "filipdutescu/renamer.nvim",
+    branch = "master",
+    requires = { "nvim-lua/plenary.nvim" },
+  },
+  { "voldikss/vim-floaterm" },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -956,7 +962,20 @@ require("nvim-tree").setup({
   },
 })
 vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
-
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>rn",
+  '<cmd>lua require("renamer").rename()<cr>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "v",
+  "<leader>rn",
+  '<cmd>lua require("renamer").rename()<cr>',
+  { noremap = true, silent = true }
+)
+--vim.keymap.set("n", "<leader>ft", "<cmd>FloatermToggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>t", "<cmd>FloatermToggle<cr><C-\\><C-N>", { noremap = true, silent = true })
 
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
