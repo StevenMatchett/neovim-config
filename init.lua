@@ -160,6 +160,7 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.diagnostic.config({
   virtual_text = true, -- Turn off inline diagnostics
+  update_in_insert = true,
 })
 
 -- Use this if you want it to automatically show all diagnostics on the
@@ -544,7 +545,6 @@ require("lazy").setup({
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -850,6 +850,7 @@ require("lazy").setup({
     requires = { "nvim-lua/plenary.nvim" },
   },
   { "voldikss/vim-floaterm" },
+  { "yardnsm/vim-import-cost" },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -959,6 +960,9 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = false,
+  },
+  update_focused_file = {
+    enable = true,
   },
 })
 vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
