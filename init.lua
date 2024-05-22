@@ -987,6 +987,10 @@ vim.api.nvim_set_keymap(
 )
 --vim.keymap.set("n", "<leader>ft", "<cmd>FloatermToggle<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>t", "<cmd>FloatermToggle<cr><C-\\><C-N>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>n", "<C-\\><C-N><cmd>FloatermNew<cr><C-\\><C-N>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>a", "<C-\\><C-N><cmd>FloatermNext<cr><C-\\><C-N>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>k", "<C-\\><C-N><cmd>FloatermKill<cr><C-\\><C-N>", { noremap = true, silent = true })
+
 vim.cmd("colorscheme nightfox")
 -- The line beneath this is called `modeline`. See `:help modeline`
 require("lualine").setup()
