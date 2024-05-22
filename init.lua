@@ -858,6 +858,13 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   { "akinsho/bufferline.nvim" },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      -- add any custom options here
+    },
+  },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -991,6 +998,8 @@ vim.keymap.set("n", "<leader>n", "<C-\\><C-N><cmd>FloatermNew<cr><C-\\><C-N>", {
 vim.keymap.set("n", "<leader>a", "<C-\\><C-N><cmd>FloatermNext<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>k", "<C-\\><C-N><cmd>FloatermKill<cr><C-\\><C-N>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<leader>ls", [[<cmd>lua require("persistence").load()<cr>]], {})
+
 vim.cmd("colorscheme nightfox")
 -- The line beneath this is called `modeline`. See `:help modeline`
 require("lualine").setup()
@@ -1000,3 +1009,11 @@ vim.api.nvim_set_keymap("n", "<C-U>", ":redo<CR>", { noremap = true, silent = tr
 
 -- vim: ts=2 sts=2 sw=2 et
 --
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   pattern = "*",
+--   callback = function()
+--     if vim.fn.isdirectory(vim.fn.getcwd()) == 1 then
+--       require("persistence").load()
+--     end
+--   end,
+-- })
