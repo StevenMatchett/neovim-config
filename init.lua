@@ -812,7 +812,7 @@ require("lazy").setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { "APZelos/blamer.nvim" },
+  { "f-person/git-blame.nvim" },
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
@@ -997,7 +997,7 @@ vim.keymap.set("n", "<leader>t", "<cmd>FloatermToggle<cr><C-\\><C-N>", { noremap
 vim.keymap.set("n", "<leader>n", "<C-\\><C-N><cmd>FloatermNew<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>a", "<C-\\><C-N><cmd>FloatermNext<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>k", "<C-\\><C-N><cmd>FloatermKill<cr><C-\\><C-N>", { noremap = true, silent = true })
-
+vim.keymap.set("n", "<leader>m", "<C-\\><C-N><cmd>NvimTreeToggle<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>ls", [[<cmd>lua require("persistence").load()<cr>]], {})
 
 vim.cmd("colorscheme nightfox")
@@ -1009,11 +1009,4 @@ vim.api.nvim_set_keymap("n", "<C-U>", ":redo<CR>", { noremap = true, silent = tr
 
 -- vim: ts=2 sts=2 sw=2 et
 --
--- vim.api.nvim_create_autocmd("VimEnter", {
---   pattern = "*",
---   callback = function()
---     if vim.fn.isdirectory(vim.fn.getcwd()) == 1 then
---       require("persistence").load()
---     end
---   end,
--- })
+vim.api.nvim_create_user_command("W", "write", {})
