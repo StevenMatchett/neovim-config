@@ -865,6 +865,28 @@ require("lazy").setup({
       -- add any custom options here
     },
   },
+  -- { "mbbill/undotree" },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "debugloop/telescope-undo.nvim",
+    },
+    config = function()
+      require("telescope").setup({
+        -- the rest of your telescope config goes here
+        extensions = {
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
+          -- other extensions:
+          -- file_browser = { ... }
+        },
+      })
+      require("telescope").load_extension("undo")
+      -- optional: vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+    end,
+  },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -1010,3 +1032,5 @@ vim.api.nvim_set_keymap("n", "<C-U>", ":redo<CR>", { noremap = true, silent = tr
 -- vim: ts=2 sts=2 sw=2 et
 --
 vim.api.nvim_create_user_command("W", "write", {})
+
+vim.keymap.set("n", "<leader>uu", "<cmd>Telescope undo<cr>")
