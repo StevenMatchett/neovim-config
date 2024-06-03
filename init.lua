@@ -1001,8 +1001,33 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 --vim.keymap.set("n", "<leader>ft", "<cmd>FloatermToggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>t", "<cmd>FloatermToggle<cr><C-\\><C-N>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>n", "<C-\\><C-N><cmd>FloatermNew<cr><C-\\><C-N>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>t", function()
+  local floaterms_exist = false
+
+  -- Check all buffers to see if there's at least one floaterm buffer
+  for _, buf in pairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_get_option(buf, "filetype") == "floaterm" then
+      floaterms_exist = true
+      break
+    end
+  end
+
+  -- If a floaterm buffer exists, toggle it; otherwise, create a new one with the specified height
+  if floaterms_exist then
+    vim.cmd("FloatermToggle")
+  else
+    vim.cmd("FloatermNew --height=0.9")
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+end, { noremap = true, silent = true })
+
+vim.keymap.set(
+  "n",
+  "<leader>n",
+  "<C-\\><C-N><cmd>FloatermNew --height=0.9 <cr><C-\\><C-N>",
+  { noremap = true, silent = true }
+)
 vim.keymap.set("n", "<leader>a", "<C-\\><C-N><cmd>FloatermNext<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>k", "<C-\\><C-N><cmd>FloatermKill<cr><C-\\><C-N>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>m", "<C-\\><C-N><cmd>NvimTreeToggle<cr><C-\\><C-N>", { noremap = true, silent = true })
