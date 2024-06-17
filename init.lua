@@ -998,7 +998,7 @@ require("nvim-tree").setup({
     sorter = "case_sensitive",
   },
   view = {
-    width = 30,
+    adaptive_size = true,
   },
   renderer = {
     group_empty = true,
@@ -1024,9 +1024,7 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 --vim.keymap.set("n", "<leader>ft", "<cmd>FloatermToggle<cr>", { noremap = true, silent = true })
-require("nvim-tree").setup({
-  view = { adaptive_size = true },
-})
+
 vim.keymap.set("n", "<leader>t", function()
   local floaterms_exist = false
 
