@@ -844,7 +844,9 @@ require("lazy").setup({
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
-  { "nvim-tree/nvim-tree.lua" },
+  {
+    "nvim-tree/nvim-tree.lua",
+  },
   {
     {
       "kdheepak/lazygit.nvim",
@@ -1022,7 +1024,9 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 --vim.keymap.set("n", "<leader>ft", "<cmd>FloatermToggle<cr>", { noremap = true, silent = true })
-
+require("nvim-tree").setup({
+  view = { adaptive_size = true },
+})
 vim.keymap.set("n", "<leader>t", function()
   local floaterms_exist = false
 
